@@ -1,4 +1,5 @@
-Nom du jeu : Capsule Trigger
+Nom du jeu : Capsule Trigger,
+
 Developpé par : Jean Durand
 Inspiré de : Johnny Trigger
 Temps pour la réalisation : 5h
