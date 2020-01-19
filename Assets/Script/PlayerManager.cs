@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
         TextWin.SetActive(false);
         TextStart.SetActive(true);
 
-        cameraVector = new Vector3(0, 2, -10);      // The offset between the player and the camera
+        cameraVector = new Vector3(0, 1, -10);      // The offset between the player and the camera
         mainCamera.position = playerTransform.position + cameraVector; // Place the camera at the right spot so it follows the player
     }
 
