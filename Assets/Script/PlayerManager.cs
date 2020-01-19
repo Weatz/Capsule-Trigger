@@ -94,7 +94,6 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Jump entered");
         playerRigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
         playerAnimator.Play(anim.name);
-        ActivateLaser();
     }
 
 

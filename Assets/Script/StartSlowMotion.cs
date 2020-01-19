@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartSlowMotion : MonoBehaviour
 {
-    public LayerMask layer;
+    public PlayerManager player;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +23,7 @@ public class StartSlowMotion : MonoBehaviour
         {
             gameObject.SetActive(false); // Prevent double activation
             SlowMotion.StartSlowMotion();
+            player.ActivateLaser();
         }
     }
 }
