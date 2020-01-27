@@ -28,6 +28,7 @@ public class Level : MonoBehaviour
         {
             playerManager.DisableLaser();
             SlowMotion.StopSlowMotion();
+            playerManager.Reload();
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletManager : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class BulletManager : MonoBehaviour
             collision.gameObject.SetActive(false);
         }
         Destroy(gameObject);
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Hostage"))
+        {
+            SlowMotion.StopSlowMotion();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        
     }
 
 }

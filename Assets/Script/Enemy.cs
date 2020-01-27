@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public Transform player;
     public Transform bulletSpawnPoint;
     public GameObject enemyBulletPrefab;
+    public Transform target;
 
     private Rigidbody bulletRigidBody;
     private GameObject bullet;
@@ -15,6 +16,10 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!target)
+        {
+            target = player;
+        }
     }
 
     // Update is called once per frame
@@ -27,8 +32,8 @@ public class Enemy : MonoBehaviour
     {
         bullet = Instantiate(enemyBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         bulletRigidBody = bullet.GetComponentInChildren<Rigidbody>();
-        bullet.transform.LookAt(player);
-        Vector3 shootDirection = Vector3.Normalize(player.position - bulletSpawnPoint.position);
+        bullet.transform.LookAt(target);
+        Vector3 shootDirection = Vector3.Normalize(target.position - bulletSpawnPoint.position);
         bulletRigidBody.AddForce(shootDirection * 20, ForceMode.Impulse);
     }
 }

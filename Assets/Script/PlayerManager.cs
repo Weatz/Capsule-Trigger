@@ -12,12 +12,16 @@ public class PlayerManager : MonoBehaviour
     public Transform bulletSpawnPoint;
     public GameObject TextStart;
     public GameObject TextWin;
+    public HUDMananger hudManager;
 
 
     private Rigidbody playerRigidbody;
     private Transform playerTransform;
     private Animator playerAnimator;
     private LineRenderer playerLaser;
+
+    private int bulletsInLoader;
+    private int maxBulletInLoader;
 
     private bool canShoot;
     private bool playing;
@@ -36,7 +40,11 @@ public class PlayerManager : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         playerLaser = GetComponent<LineRenderer>();
         canShoot = false;
+        won = false;
         playing = false;
+        // TODO FOR LATER WHEN ADD MORE WEAPONS : MAKE A WEAPON MANAGER
+        maxBulletInLoader = 5; // for now only 1 weapon with 5 bullets
+        bulletsInLoader = maxBulletInLoader;
 
         TextWin.SetActive(false);
         TextStart.SetActive(true);
@@ -48,7 +56,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (!playing)
+        if (!playing && !won)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -89,10 +97,10 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    public void Jump(AnimationClip anim)
+    public void Jump(AnimationClip anim, float jumpForce)
     {
         Debug.Log("Jump entered");
-        playerRigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
+        playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         playerAnimator.Play(anim.name);
     }
 
@@ -116,8 +124,15 @@ public class PlayerManager : MonoBehaviour
 
     public void Shoot()
     {
-        bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, bulletSpeed, 0), ForceMode.Impulse);
+        if (bulletsInLoader > 0)
+        {            
+            bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, bulletSpeed, 0), ForceMode.Impulse);
+            bulletsInLoader--;
+            hudManager.SetNumberofBullets(bulletsInLoader);
+
+
+        }
 
     }
 
@@ -128,6 +143,13 @@ public class PlayerManager : MonoBehaviour
         won = true;
         TextWin.SetActive(true);
     }
+
+    public void Reload()
+    {
+        bulletsInLoader = maxBulletInLoader;
+        hudManager.SetNumberofBullets(bulletsInLoader);
+    }
+
 
 
 }

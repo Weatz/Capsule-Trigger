@@ -12,7 +12,7 @@ public class EnemyBulletManager : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             SlowMotion.StopSlowMotion();
-            SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         //Destroy(gameObject);
     }

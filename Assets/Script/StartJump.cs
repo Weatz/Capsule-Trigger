@@ -7,6 +7,7 @@ public class StartJump : MonoBehaviour
 
     public PlayerManager player;
     public AnimationClip anim;
+    public float jumpForce;
     public int numberOfEnemies;
 
     private void OnTriggerEnter(Collider other)
@@ -15,7 +16,7 @@ public class StartJump : MonoBehaviour
         {
             gameObject.SetActive(false);
             Level.setNumberOfEnemies(numberOfEnemies);
-            player.Jump(anim);
+            player.Jump(anim, jumpForce);
         }
     }
 }
